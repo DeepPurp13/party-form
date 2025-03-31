@@ -21,6 +21,7 @@ function App() {
       <h1>Party Message Board</h1>
       <form
             name="party-messages"
+            netlify
             method="POST"
             data-netlify="true"
             onSubmit={(e) => {
