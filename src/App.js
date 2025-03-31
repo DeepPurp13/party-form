@@ -47,17 +47,25 @@ function App() {
   return (
     <div className="container">
       <h1>Party Message Board</h1>
-      <form onSubmit={handleSubmit}>
-        <textarea
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Leave an anonymous message for the party..."
-          required
-        />
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Submitting...' : 'Submit Anonymously'}
-        </button>
-      </form>
+      <form
+            name="party-messages"
+            method="POST"
+            data-netlify="true"
+            onSubmit={(e) => {
+              e.preventDefault();
+              const formData = new FormData(e.target);
+              fetch("/", {
+                method: "POST",
+                body: formData,
+              })
+                .then(() => setSubmitted(true))
+                .catch(() => alert("Submission failed!"));
+            }}
+          >
+  <input type="hidden" name="form-name" value="party-messages" />
+  <textarea name="message" required />
+  <button type="submit">Submit</button>
+</form>
     </div>
   );
 }
