@@ -4,34 +4,7 @@ import './App.css';
 function App() {
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!message.trim()) return;
-    
-    setIsSubmitting(true);
-    
-    try {
-      // We'll implement the server part next
-      const response = await fetch('http://localhost:5001/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message }),
-      });
-      
-      if (response.ok) {
-        setSubmitted(true);
-      }
-    } catch (error) {
-      console.error('Submission error:', error);
-      alert('Failed to submit. Are you connected to the party WiFi?');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   if (submitted) {
     return (
